@@ -1,0 +1,16 @@
+        var newState = state
+        newState.selectedElement = element
+        
+        return newState
+    }
+    
+    private func onLongTap(_ point: CGPoint,
+                           in state: AppState) -> AppState {
+        var newCollage = collage
+        guard let index = newCollage.dependencies.firstIndex(where: {
+            !$0.pointIDs.intersection(ids).isEmpty
+        }) else {
+            newCollage.dependencies.append(.init(pointIDs: ids))
+            return newCollage
+        }
+        
